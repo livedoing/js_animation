@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Main js animation </title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<canvas id="canvas" width="400" height="400" color='#FF0011'></canvas>
+<script src="utils.js"></script>
+<script src="class/arrow.js"></script>
+<script src="class/ball.js"></script>
+<script>
+window.onload = function() {
+    var canvas = document.getElementById("canvas"),
+    context = canvas.getContext("2d"),
+    angle = 0,
+    range = 50,
+    centerY = canvas.height / 2,
+    xspeed = 2,
+    yspeed = 0.05,
+    xpos = 0,
+    ypos = centerY;
+(function drawFrame() {
+    window.requestAnimationFrame(drawFrame, canvas);
+    context.beginPath(),
+    context.moveTo(xpos, ypos);
+    xpos += xspeed;
+    angle += yspeed
+    ypos = centerY + Math.sin(angle) * range;
+    context.lineTo(xpos, ypos);
+    context.stroke()
+}());
+}
+</script>
+<!-- <script>
+window.onload = function() {
+    var canvas = document.getElementById("canvas"),
+    context = canvas.getContext("2d"),
+    ball = new Ball(),
+    angle = 0,
+    centerScale = 1,
+    range = 0.5,
+    speed = 0.05;
+ball.x = canvas.width / 2;
+ball.y = canvas.height / 2;
+
+(function drawFrame() {
+    window.requestAnimationFrame(drawFrame, canvas);
+    context.clearRect(0,0, canvas.width, canvas.height);
+    ball.scaleX = ball.scaleY = centerScale + Math.sin(angle) * range
+    angle += speed;
+    ball.draw(context);
+}());
+}
+</script> -->
+
+<!--script>
+//曲线运动
+window.onload = function () {
+var canvas = document.getElementById("canvas"),
+    context = canvas.getContext("2d"),
+    ball = new Ball(),
+    angle = 0,
+    centerY = 200,
+    range = 50,
+    xspeed = 1,
+    yspeed = 0.05;
+ball.x = -ball.radius;
+(function drawFrame() {
+    window.requestAnimationFrame(drawFrame, canvas);
+    context.clearRect(0,0, canvas.width, canvas.height);
+    ball.x += xspeed;
+    if (ball.x > canvas.width+ball.radius) {
+        ball.x = -ball.radius;
+    }
+    ball.y = centerY / 2 + Math.sin(angle) * range;
+    angle += yspeed;
+    ball.draw(context);
+}());
+}
+</script-->
+<!--script>
+    //重直运动
+window.onload = function() {
+    var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        ball = new Ball(),
+        angle = 0;
+    ball.x = canvas.width/2
+    ball.y = canvas.height/2
+    ball.draw(context)
+
+    (function drawFrame(){
+        window.requestAnimationFrame(drawFrame, canvas);
+        context.clearRect(0,0,canvas.width, canvas.height);
+        ball.y = canvas.height / 2 + Math.sin(angle) * 50;
+        angle += 0.1;
+        ball.draw(context);
+    }());
+
+}
+</script-->
+
+<!--script>
+// arrow draw
+window.onload = function () {
+    var canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        mouse = utils.captureMouse(canvas),
+        arrow = new Arrow();
+    arrow.x = canvas.width / 2;
+    arrow.y = canvas.height / 2;
+    (function drawFrame() {
+        window.requestAnimationFrame(drawFrame, canvas);
+        context.clearRect(0,0, canvas.width, canvas.height);
+        var dx = mouse.x - arrow.x,
+            dy = mouse.y - arrow.y;
+        arrow.rotation = Math.atan2(dy, dx);
+        arrow.draw(context);
+    }());
+
+};
+</script-->
+</body>
+</html>
